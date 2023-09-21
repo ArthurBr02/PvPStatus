@@ -2,3 +2,8 @@ name: PvPStatus
 version: '${project.version}'
 main: fr.arthurbr02.pvpstatus.PvPStatus
 api-version: '1.20'
+commands:
+  tagMode:
+    description: Change ton status PvP ou affiche ton status actuel
+    usage: /<command> <status (passif, neutre, agressif)> ou /<command>
+    aliases: [pvpstatus, pvp, status]
