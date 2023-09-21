@@ -71,9 +71,9 @@ public class ChangeStatusCommand implements CommandExecutor {
         return true;
     }
 
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        return null;
-
-    }
+//    @Override
+//    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+//        return null;
+//
+//    }
 }

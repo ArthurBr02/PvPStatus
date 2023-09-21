@@ -44,6 +44,9 @@ public final class PvPStatus extends JavaPlugin {
             List<Player> playersTmp = Lists.newArrayList(Bukkit.getOnlinePlayers());
             for (Player player : playersTmp) {
                 ArmorStand armorStand = StatusManager.getPlayerArmorStandMap().get(player);
+                if (armorStand == null) {
+                    continue;
+                }
                 Location location = player.getLocation();
                 armorStand.teleport(new Location(location.getWorld(), location.getX(), location.getY() + 2.2, location.getZ()));
             }
