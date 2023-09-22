@@ -2,6 +2,7 @@ package fr.arthurbr02.pvpstatus.status;
 
 import fr.arthurbr02.pvpstatus.PvPStatus;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -12,9 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StatusManager {
-    public static final Status NEUTRAL = new Status("neutral", "§e", "Neutre");
-    public static final Status PASSIVE = new Status("passive", "§a", "Passif");
-    public static final Status AGGRESSIVE = new Status("aggressive", "§c", "Agressif");
+    public static final Status NEUTRAL = new Status("neutral", Color.YELLOW, "Neutre");
+    public static final Status PASSIVE = new Status("passive", Color.GREEN, "Passif");
+    public static final Status AGGRESSIVE = new Status("aggressive", Color.RED, "Agressif");
 
     private static Map<Player, ArmorStand> playerArmorStandMap = new HashMap<>();
 

@@ -1,13 +1,14 @@
 package fr.arthurbr02.pvpstatus.status;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 
 public class Status {
     private final String status;
-    private final String color;
+    private final Color color;
     private final String label;
 
-    public Status(String status, String color, String label) {
+    public Status(String status, Color color, String label) {
         this.status = status;
         this.color = color;
         this.label = label;
@@ -17,7 +18,7 @@ public class Status {
         return status;
     }
 
-    public String getColor() {
+    public Color getColor() {
         return color;
     }
 

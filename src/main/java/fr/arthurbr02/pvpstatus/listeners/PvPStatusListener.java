@@ -32,27 +32,6 @@ public class PvPStatusListener implements Listener {
 
         }
 
-        StatusManager.createArmorStandForPlayer(player);
-
-    }
-
-    @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-        StatusManager.removeArmorStandForPlayer(player);
-
-    }
-
-    @EventHandler
-    public void onEntityDamageEntity(EntityDamageByEntityEvent event) {
-        if (event.getEntity() instanceof ArmorStand) {
-            if (StatusManager.getPlayerArmorStandMap().containsValue((ArmorStand) event.getEntity())) {
-                event.setCancelled(true);
-
-            }
-
-        }
-
     }
 
     @EventHandler
@@ -82,23 +61,6 @@ public class PvPStatusListener implements Listener {
                 player.setHealth(event.getDamage() * 2);
 
             }
-        }
-
-    }
-
-    @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent event) {
-        Player player = event.getEntity();
-        StatusManager.removeArmorStandForPlayer(player);
-
-    }
-
-    @EventHandler
-    public void onPlayerRevive(PlayerMoveEvent event) {
-        Player player = event.getPlayer();
-        if (player.getHealth() > 0 && !StatusManager.getPlayerArmorStandMap().containsKey(player)) {
-            StatusManager.createArmorStandForPlayer(player);
-
         }
 
     }

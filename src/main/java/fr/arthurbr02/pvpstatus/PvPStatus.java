@@ -2,10 +2,13 @@ package fr.arthurbr02.pvpstatus;
 
 import com.google.common.collect.Lists;
 import fr.arthurbr02.pvpstatus.commands.ChangeStatusCommand;
+import fr.arthurbr02.pvpstatus.commands.ChangeStatusCompleter;
 import fr.arthurbr02.pvpstatus.listeners.PvPStatusListener;
 import fr.arthurbr02.pvpstatus.status.StatusManager;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,7 +28,8 @@ public final class PvPStatus extends JavaPlugin {
         this.saveConfig();
 
         getServer().getPluginManager().registerEvents(new PvPStatusListener(this), this);
-        this.getCommand("tagMode").setExecutor(new ChangeStatusCommand(this));
+        getCommand("tagMode").setExecutor(new ChangeStatusCommand(this));
+        getCommand("tagMode").setTabCompleter(new ChangeStatusCompleter());
 
         List<Player> players = Lists.newArrayList(Bukkit.getOnlinePlayers());
         for (Player player : players) {
@@ -36,31 +40,26 @@ public final class PvPStatus extends JavaPlugin {
 
             }
 
-            StatusManager.createArmorStandForPlayer(player);
-
         }
 
         task = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
             List<Player> playersTmp = Lists.newArrayList(Bukkit.getOnlinePlayers());
             for (Player player : playersTmp) {
-                ArmorStand armorStand = StatusManager.getPlayerArmorStandMap().get(player);
-                if (armorStand == null) {
-                    continue;
-                }
-                Location location = player.getLocation();
-                armorStand.teleport(new Location(location.getWorld(), location.getX(), location.getY() + 2.2, location.getZ()));
+                if (player.isDead()) continue;
+                Color color = StatusManager.getPlayerStatus(player.getUniqueId().toString()).getColor();
+                Particle.DustOptions dustOptions = new Particle.DustOptions(color, 1F);
+                player.getWorld().spawnParticle(Particle.REDSTONE, player.getLocation().add(0, 2.8, 0), 25, dustOptions);
+
             }
-        }, 1L, 0L);
+
+        }, 0L, 0L);
+
     }
 
     @Override
     public void onDisable() {
         Bukkit.getScheduler().cancelTask(task);
 
-        List<Player> players = Lists.newArrayList(Bukkit.getOnlinePlayers());
-        for (Player player : players) {
-            StatusManager.removeArmorStandForPlayer(player);
-        }
     }
 
     public static PvPStatus getInstance() {

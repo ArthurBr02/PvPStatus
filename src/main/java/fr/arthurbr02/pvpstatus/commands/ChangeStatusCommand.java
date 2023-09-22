@@ -59,21 +59,9 @@ public class ChangeStatusCommand implements CommandExecutor {
                     return true;
             }
 
-            ArmorStand armorStand = StatusManager.getPlayerArmorStandMap().get(player);
-            String statusString = main.getConfig().getConfigurationSection(player.getUniqueId().toString()).getString(".pvpStatus");
-            Status status = StatusManager.getStatus(statusString);
-            armorStand.setCustomName(status.getColor() + status.getLabel());
-            armorStand.setCustomNameVisible(true);
-            StatusManager.getPlayerArmorStandMap().put(player, armorStand);
-
         }
 
         return true;
     }
 
-//    @Override
-//    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-//        return null;
-//
-//    }
 }
