@@ -28,6 +28,7 @@ public class PvPStatusListener implements Listener {
         if (main.getConfig().getConfigurationSection(player.getUniqueId().toString()) == null) {
             main.getConfig().createSection(player.getUniqueId().toString());
             main.getConfig().set(player.getUniqueId().toString() + ".pvpStatus", "neutral");
+            StatusManager.setParticleStatus(player.getUniqueId().toString(), true);
             main.saveConfig();
 
         }

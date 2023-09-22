@@ -7,3 +7,7 @@ commands:
     description: Change ton status PvP ou affiche ton status actuel
     usage: /<command> <status (passif, neutre, agressif)> ou /<command>
     aliases: [pvpstatus, pvp, status]
+  particles:
+    description: Affiche ou retire les particules
+    usage: /<command> <on/off>
+    aliases: [particule, particle, particules]

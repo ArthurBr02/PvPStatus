@@ -51,6 +51,21 @@ public class StatusManager {
         }
     }
 
+    public static boolean getParticleStatus(String uuid) {
+        if (PvPStatus.getInstance().getConfig().getConfigurationSection(uuid).get(".particleStatus") == null) {
+            PvPStatus.getInstance().getConfig().getConfigurationSection(uuid).set(".particleStatus", true);
+            PvPStatus.getInstance().saveConfig();
+            return true;
+        } else {
+            return PvPStatus.getInstance().getConfig().getConfigurationSection(uuid).getBoolean(".particleStatus");
+        }
+    }
+
+    public static void setParticleStatus(String uuid, boolean status) {
+        PvPStatus.getInstance().getConfig().getConfigurationSection(uuid).set(".particleStatus", status);
+        PvPStatus.getInstance().saveConfig();
+    }
+
     public void setPlayerStatus(String uuid, Status status) {
         main.getConfig().getConfigurationSection(uuid).set( ".pvpStatus", status.getStatus());
         main.saveConfig();
